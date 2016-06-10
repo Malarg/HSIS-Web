@@ -1,0 +1,9 @@
+﻿@using Microsoft.AspNet.Identity.EntityFramework
+@model IdentityUserRole
+@{
+
+    var roles = (IEnumerable<IdentityRole>)ViewBag.Roles;
+}
+<div>
+    @roles.FirstOrDefault(x => x.Id == Model.RoleId).Name
+</div>

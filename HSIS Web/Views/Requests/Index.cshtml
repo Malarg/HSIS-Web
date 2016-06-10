@@ -1,0 +1,70 @@
+﻿@model IEnumerable<HSIS_Web.Models.Request>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Assistant", "Index", new {sortOrder = ViewBag.AssistantSort})
+        </th>
+        <th>
+            @Html.ActionLink("Client", "Index", new { sortOrder = ViewBag.ClientSort })
+        </th>
+        <th>
+            @Html.ActionLink("Time", "Index", new { sortOrder = ViewBag.TimeSort })
+        </th>
+        <th>
+            @Html.ActionLink("Problem", "Index", new { sortOrder = ViewBag.ProblemSort })
+        </th>
+        <th>
+            @Html.ActionLink("Solution", "Index", new { sortOrder = ViewBag.SolutionSort })
+        </th>
+        <th>
+            @Html.ActionLink("Cost", "Index", new { sortOrder = ViewBag.CostSort })
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Assistant.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Client.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Problem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Solution)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cost)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
