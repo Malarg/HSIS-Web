@@ -10,6 +10,8 @@ using HSIS_Web.Models;
 
 namespace HSIS_Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Assistant")]
     public class RequestsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

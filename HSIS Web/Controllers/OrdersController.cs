@@ -11,6 +11,8 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace HSIS_Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Vendor")]
     public class OrdersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

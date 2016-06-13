@@ -115,11 +115,10 @@ namespace HSIS_Web.Controllers
             return View();
         }
 
-        // POST: Products/Create
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
-        // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Vendor")]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create([Bind(Include = "Id,Title,Type,PurchacePrice,SellingPrice,Quantity,Deskription,ShellId")] Product product)
         {
             if (ModelState.IsValid)
@@ -133,7 +132,8 @@ namespace HSIS_Web.Controllers
             return View(product);
         }
 
-        // GET: Products/Edit/5
+        [Authorize(Roles = "Vendor")]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -154,6 +154,8 @@ namespace HSIS_Web.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Vendor")]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "Id,Title,Type,PurchacePrice,SellingPrice,Quantity,Deskription,ShellId")] Product product)
         {
             if (ModelState.IsValid)
@@ -167,6 +169,8 @@ namespace HSIS_Web.Controllers
         }
 
         // GET: Products/Delete/5
+        [Authorize(Roles = "Vendor")]
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

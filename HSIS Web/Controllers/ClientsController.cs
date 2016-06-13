@@ -10,6 +10,10 @@ using HSIS_Web.Models;
 
 namespace HSIS_Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Assistant")]
+    [Authorize(Roles = "Vendor")]
+    [Authorize(Roles = "Client")]
     public class ClientsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -95,6 +99,9 @@ namespace HSIS_Web.Controllers
         }
 
         // GET: Clients/Create
+        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Vendor")]
+        [Authorize(Roles = "Assistant")]
         public ActionResult Create()
         {
             return View();
@@ -105,6 +112,9 @@ namespace HSIS_Web.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Vendor")]
+        [Authorize(Roles = "Assistant")]
         public ActionResult Create([Bind(Include = "Id,FirstName,LastName,PhoneNumber,Email,Discount")] Client client)
         {
             if (ModelState.IsValid)
@@ -118,6 +128,9 @@ namespace HSIS_Web.Controllers
         }
 
         // GET: Clients/Edit/5
+        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Vendor")]
+        [Authorize(Roles = "Assistant")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -137,6 +150,9 @@ namespace HSIS_Web.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Vendor")]
+        [Authorize(Roles = "Assistant")]
         public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,PhoneNumber,Email,Discount")] Client client)
         {
             if (ModelState.IsValid)
@@ -149,6 +165,9 @@ namespace HSIS_Web.Controllers
         }
 
         // GET: Clients/Delete/5
+        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Vendor")]
+        [Authorize(Roles = "Assistant")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
