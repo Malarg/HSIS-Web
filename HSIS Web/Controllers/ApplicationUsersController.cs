@@ -24,6 +24,7 @@ namespace HSIS_Web.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: ApplicationUsers
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             var roles = db.Roles.ToArray();

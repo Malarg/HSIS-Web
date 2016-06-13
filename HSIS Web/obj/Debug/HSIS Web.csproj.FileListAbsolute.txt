@@ -200,3 +200,4 @@ C:\hse\Практика\HSIS-Web\HSIS Web\bin\ru\Microsoft.Owin.Security.Microso
 C:\hse\Практика\HSIS-Web\HSIS Web\obj\Debug\HSIS Web.csprojResolveAssemblyReference.cache
 C:\hse\Практика\HSIS-Web\HSIS Web\obj\Debug\HSIS Web.dll
 C:\hse\Практика\HSIS-Web\HSIS Web\obj\Debug\HSIS Web.pdb
+C:\hse\Практика\HSIS-Web\HSIS Web\obj\Debug\HSIS Web.csproj.ResolveComReference.cache

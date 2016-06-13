@@ -7,12 +7,40 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HSIS_Web.Models;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace HSIS_Web.Controllers
 {
     public class OrdersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
+        public void CreateReport()
+        {
+            Excel.Application app = new Excel.Application();
+            var workbook = app.Workbooks.Add(Type.Missing);
+            var worksheet = workbook.Worksheets.Add(Type.Missing);
+            worksheet.Cells[1, 1].Value2 = "Title";
+            worksheet.Cells[1, 2].Value2 = "Profit";
+            worksheet.Cells[1, 3].Value2 = "Income";
+            worksheet.Cells[1, 4].Value2 = "Date";
+            worksheet.Cells[1, 5].Value2 = "Product";
+            worksheet.Cells[1, 6].Value2 = "Vendor";
+            worksheet.Cells[1, 7].Value2 = "Client";
+            var orders = db.Orders.ToList();
+            for (var i = 0; i < orders.Count; i++)
+            {
+                worksheet.Cells[i + 2, 1].Value2 = orders[i].Title;
+                worksheet.Cells[i + 2, 2].Value2 = orders[i].Profit;
+                worksheet.Cells[i + 2, 3].Value2 = orders[i].Income;
+                worksheet.Cells[i + 2, 4].Value2 = orders[i].Date.ToString();
+                worksheet.Cells[i + 2, 5].Value2 = orders[i].Product?.Title;
+                worksheet.Cells[i + 2, 6].Value2 = orders[i].Vendor?.FullName;
+                worksheet.Cells[i + 2, 7].Value2 = orders[i].Client?.FullName;
+            }
+            workbook.SaveAs("C:\\Users\\malar\\Downloads\\Отчет.xlsx");
+            app.Quit();
+        }
 
         // GET: Orders
         public ActionResult Index()

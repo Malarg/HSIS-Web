@@ -9,6 +9,10 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@using (Html.BeginForm("CreateReport", "Orders"))
+{
+    <button type="submit" name="action" value="CreateReport">Сформировать отчет</button>
+}
 <table class="table">
     <tr>
         <th>

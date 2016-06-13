@@ -10,6 +10,7 @@ using HSIS_Web.Models;
 
 namespace HSIS_Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class StoragesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
