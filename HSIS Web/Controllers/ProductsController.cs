@@ -109,6 +109,7 @@ namespace HSIS_Web.Controllers
         }
 
         // GET: Products/Create
+        [Authorize(Roles = "Admin,Vendor")]
         public ActionResult Create()
         {
             ViewBag.ShellId = new SelectList(db.Shells, "Id", "Title");
@@ -117,8 +118,7 @@ namespace HSIS_Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Vendor")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Vendor")]
         public ActionResult Create([Bind(Include = "Id,Title,Type,PurchacePrice,SellingPrice,Quantity,Deskription,ShellId")] Product product)
         {
             if (ModelState.IsValid)
@@ -132,8 +132,7 @@ namespace HSIS_Web.Controllers
             return View(product);
         }
 
-        [Authorize(Roles = "Vendor")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Vendor")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -154,8 +153,7 @@ namespace HSIS_Web.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Vendor")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Vendor")]
         public ActionResult Edit([Bind(Include = "Id,Title,Type,PurchacePrice,SellingPrice,Quantity,Deskription,ShellId")] Product product)
         {
             if (ModelState.IsValid)
@@ -169,8 +167,7 @@ namespace HSIS_Web.Controllers
         }
 
         // GET: Products/Delete/5
-        [Authorize(Roles = "Vendor")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Vendor")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

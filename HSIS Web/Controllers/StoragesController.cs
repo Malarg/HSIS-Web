@@ -10,12 +10,12 @@ using HSIS_Web.Models;
 
 namespace HSIS_Web.Controllers
 {
-    [Authorize(Roles = "Admin")]
     public class StoragesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Storages
+        [Authorize(Roles = "Admin")]
         public ActionResult Index(string sortOrder, string searchString)
         {
             var storages = from s in db.Storages select s;
@@ -77,6 +77,7 @@ namespace HSIS_Web.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create([Bind(Include = "Id,Title,Capasity")] Storage storage)
         {
             if (ModelState.IsValid)
@@ -90,6 +91,7 @@ namespace HSIS_Web.Controllers
         }
 
         // GET: Storages/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -109,6 +111,7 @@ namespace HSIS_Web.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "Id,Title,Capasity")] Storage storage)
         {
             if (ModelState.IsValid)
@@ -121,6 +124,7 @@ namespace HSIS_Web.Controllers
         }
 
         // GET: Storages/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

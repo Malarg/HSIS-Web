@@ -11,8 +11,6 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace HSIS_Web.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    [Authorize(Roles = "Vendor")]
     public class OrdersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -45,6 +43,7 @@ namespace HSIS_Web.Controllers
         }
 
         // GET: Orders
+        [Authorize(Roles = "Admin,Vendor,Client")]
         public ActionResult Index()
         {
             var orders = db.Orders.Include(o => o.Client).Include(o => o.Product).Include(o => o.Vendor);
@@ -67,6 +66,7 @@ namespace HSIS_Web.Controllers
         }
 
         // GET: Orders/Create
+        [Authorize(Roles = "Admin,Vendor")]
         public ActionResult Create()
         {
             ViewBag.ClientId = new SelectList(db.Clients, "Id", "FirstName");
@@ -80,6 +80,7 @@ namespace HSIS_Web.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Vendor")]
         public ActionResult Create([Bind(Include = "Id,Title,Profit,Income,Date,ProductId,VendorId,ClientId")] Order order)
         {
             if (ModelState.IsValid)
@@ -96,6 +97,7 @@ namespace HSIS_Web.Controllers
         }
 
         // GET: Orders/Edit/5
+        [Authorize(Roles = "Admin,Vendor")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -118,6 +120,7 @@ namespace HSIS_Web.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Vendor")]
         public ActionResult Edit([Bind(Include = "Id,Title,Profit,Income,Date,ProductId,VendorId,ClientId")] Order order)
         {
             if (ModelState.IsValid)
@@ -133,6 +136,7 @@ namespace HSIS_Web.Controllers
         }
 
         // GET: Orders/Delete/5
+        [Authorize(Roles = "Admin,Vendor")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

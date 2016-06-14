@@ -10,13 +10,12 @@ using HSIS_Web.Models;
 
 namespace HSIS_Web.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    [Authorize(Roles = "Assistant")]
     public class RequestsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Requests
+        [Authorize(Roles = "Admin,Assistant,Client,Vendor")]
         public ActionResult Index(string sortOrder, string searchString)
         {
             var requests1 = db.Requests.Include(r => r.Assistant).Include(r => r.Client);
@@ -106,6 +105,7 @@ namespace HSIS_Web.Controllers
         }
 
         // GET: Requests/Create
+        [Authorize(Roles = "Admin,Assistant")]
         public ActionResult Create()
         {
             ViewBag.AssistantId = new SelectList(db.Assistants, "Id", "FullName");
@@ -118,6 +118,7 @@ namespace HSIS_Web.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Assistant")]
         public ActionResult Create([Bind(Include = "Id,Time,Problem,Solution,Cost,ClientId,AssistantId")] Request request)
         {
             if (ModelState.IsValid)
@@ -133,6 +134,7 @@ namespace HSIS_Web.Controllers
         }
 
         // GET: Requests/Edit/5
+        [Authorize(Roles = "Admin,Assistant")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -154,6 +156,7 @@ namespace HSIS_Web.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Assistant")]
         public ActionResult Edit([Bind(Include = "Id,Time,Problem,Solution,Cost,ClientId,AssistantId")] Request request)
         {
             if (ModelState.IsValid)
@@ -168,6 +171,7 @@ namespace HSIS_Web.Controllers
         }
 
         // GET: Requests/Delete/5
+        [Authorize(Roles = "Admin,Assistant")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
